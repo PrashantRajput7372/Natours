@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const express = require("express");
 const tour = require("./Routes/TourRoute");
 const user = require("./Routes/UserRoute");
+const review = require("./Routes/ReviewRoute");
 const mogoose = require("mongoose");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./Controler/errorControler");
@@ -58,6 +59,7 @@ app.use(xss());
 //Routes
 app.use("/api/v1/tours", tour);
 app.use("/api/v1/user", user);
+app.use("/api/v1/review", review);
 
 //koi unknow url ke liye error throw krega
 app.all("*", (req, res, next) => {
