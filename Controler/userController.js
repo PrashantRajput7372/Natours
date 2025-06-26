@@ -12,6 +12,19 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
+//Get me
+exports.getMe = catchAsync(async (req, res, next) => {
+  const me = req.user.id;
+  const data = await User.findById(me);
+  res.status(200).json({
+    status: "Success",
+    message: "Below is your Details",
+    data: {
+      data,
+    },
+  });
+});
+
 // Get all Users
 
 exports.getAllUser = catchAsync(async (req, res, next) => {

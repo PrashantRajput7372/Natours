@@ -4,6 +4,7 @@ const express = require("express");
 const tourController = require("../Controler/tourController");
 const router = express.Router();
 const authController = require("../Controler/authController");
+const reviewRouter = require("./ReviewRoute");
 
 // const checkID = (req, res, next, val) => {
 //   // Your middleware logic here
@@ -11,8 +12,16 @@ const authController = require("../Controler/authController");
 //   if (val) console.log(`id is----->${val}`);
 //   next();
 // };
+router.use("/:tourId/reviews", reviewRouter);
 
-router.route("/").get(tourController.getAllTour).post(tourController.addTour);
+router
+  .route("/")
+  .get(tourController.getAllTour)
+  .post(
+    authController.protect,
+    authController.restrictTO("admin", "lead-guide"),
+    tourController.addTour
+  );
 
 router.route("/stas").get(tourController.getTourStats);
 // router.param("id", tourController.checkId); 🐒🐒🐒this we were using for check id now it commentd
@@ -30,7 +39,11 @@ router
     authController.restrictTO("admin", "lead-guide"),
     tourController.deleteTour
   )
-  .patch(tourController.editTour);
+  .patch(
+    authController.protect,
+    authController.restrictTO("admin", "lead-guide"),
+    tourController.editTour
+  );
 
 //********Either you can make {get,edit,delete,update} using below thing else you can use route in which you can do option chaining to make code look clean */
 // app.get(`/api/v1/tours/:id`, tourById);

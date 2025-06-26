@@ -118,14 +118,25 @@ exports.protect = catchAsync(async (req, res, next) => {
 // this method is restricting the user to delete tour or user from the tour modal basically here we can define some with special features like admin role
 exports.restrictTO = (...role) => {
   return (req, res, next) => {
-    // const role = req.user.role;
+    // const role = req.user.role;zz
     if (!role.includes(req.user.role)) {
-      return next(
-        new AppError(
-          "you are not authorized to change Delete this tour Kindly Contact ADMIN Team!!!",
-          401
-        )
-      );
+      console.log(role);
+
+      if (role[0] === "user") {
+        return next(
+          new AppError(
+            " ADMIN Team and lead-guide are not allowed to use this feature 😒!!!",
+            401
+          )
+        );
+      } else {
+        return next(
+          new AppError(
+            "Only admin team is Authorized to make Create,Edit & Delete Tours, Kindly Contact ADMIN Team for any Support or Query!!!",
+            401
+          )
+        );
+      }
     }
     next();
   };

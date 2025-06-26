@@ -58,8 +58,9 @@ app.use(xss());
 
 //Routes
 app.use("/api/v1/tours", tour);
+// app.use("/api/v1/tours", tour);
 app.use("/api/v1/user", user);
-app.use("/api/v1/review", review);
+app.use("/api/v1/reviews", review);
 
 //koi unknow url ke liye error throw krega
 app.all("*", (req, res, next) => {
