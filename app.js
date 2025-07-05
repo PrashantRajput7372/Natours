@@ -12,9 +12,13 @@ const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const hpp = require("hpp");
 const xss = require("xss-clean");
+const path = require("path");
 // const path = require("path");
 const dotenv = require("dotenv");
 const { default: mongoose } = require("mongoose");
+const cors = require("cors");
+
+// Basic allow all (for dev only)
 
 dotenv.config({ path: "./config.env" });
 
@@ -54,6 +58,17 @@ app.use(express.json({ limit: "10kb" }));
 app.use(mongoSanitize());
 
 // Data sanitization against XSS
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+  next();
+});
+app.use("/img", express.static(path.join(__dirname, "public/img")));
 app.use(xss());
 
 //Routes
