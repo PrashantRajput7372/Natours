@@ -49,7 +49,7 @@ const limiter = ratelimit({
   meassage: "Too Many request from this IP, Please try again after an Hour!",
 });
 
-app.use("/api", limiter);
+// app.use("/api", limiter);
 
 //data read krta hai req.body se or usme linit hai 10kb se jada read nai krege
 app.use(express.json({ limit: "10kb" }));

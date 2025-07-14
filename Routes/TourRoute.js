@@ -33,7 +33,7 @@ router
 router.route("/monthly-plans/:year").get(tourController.getMonthlyPlan);
 router
   .route("/:id")
-  .get(authController.protect, tourController.tourById)
+  .get( tourController.tourById)
   .delete(
     authController.protect,
     authController.restrictTO("admin", "lead-guide"),
