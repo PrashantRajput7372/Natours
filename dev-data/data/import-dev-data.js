@@ -28,7 +28,7 @@ const importData = async () => {
     await Tour.create(tours);
     await User.create(users);
     await Review.create(reviews);
-    console.log("Data Succesfully loaded");
+
   } catch (error) {
     console.log(error);
   }

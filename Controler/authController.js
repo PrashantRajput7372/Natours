@@ -120,7 +120,7 @@ exports.restrictTO = (...role) => {
   return (req, res, next) => {
     // const role = req.user.role;zz
     if (!role.includes(req.user.role)) {
-      console.log(role);
+      
 
       if (role[0] === "user") {
         return next(

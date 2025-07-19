@@ -5,7 +5,6 @@ const APIFeatures = require("./../utils/APIFeatures");
 exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findByIdAndDelete(req.params.id);
-    console.log(req.params.id);
     if (!doc) {
       return next(new AppError("No document found with that ID", 404));
     }
@@ -18,7 +17,6 @@ exports.deleteOne = (Model) =>
 
 exports.updateOne = (Model) =>
   catchAsync(async (req, res, next) => {
-    console.log(req.body);
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
