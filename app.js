@@ -86,6 +86,10 @@ app.use("/api/v1/tours", tour);
 app.use("/api/v1/user", user);
 app.use("/api/v1/reviews", review);
 
+app.get("/", (req, res) => {
+  res.status(200).send("🚀 API is running!");
+});
+
 //koi unknow url ke liye error throw krega
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.url} on this server`));
