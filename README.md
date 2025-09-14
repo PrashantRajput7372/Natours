@@ -63,8 +63,8 @@ You can access the live backend here:
 
 ## ⚡️ Getting Started  
 
-1. **Clone this repository:**  
-   ```bash
+### 1. Clone this repository  
+```bash
 git clone https://github.com/PrashantRajput7372/NatoureBackend.git
 cd NatoureBackend
 
