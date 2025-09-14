@@ -64,7 +64,8 @@ You can access the live backend here:
 ## ⚡️ Getting Started  
 
 1. **Clone this repository:**  
-   git clone https://github.com/PrashantRajput7372/NatoureBackend.git ```bash
+   git clone https://github.com/PrashantRajput7372/NatoureBackend.git
+   ```bash
 
 ## Install Dependencies 
 
