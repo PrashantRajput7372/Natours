@@ -90,12 +90,14 @@ The app will run on http://localhost:5000 by default.
 
 --------
 
-## 🛠️ Project Status
+
+
+### 2.🛠️ Project Status
 This project is still in progress. More features will be added and improvements are ongoing.
 
 ------
 
-## 📬 Feedback & Contributions
+### 3.📬 Feedback & Contributions
 
 Feel free to open issues or pull requests for suggestions, bug fixes, or new features!
 
