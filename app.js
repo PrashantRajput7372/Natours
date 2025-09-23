@@ -1,5 +1,7 @@
 const { json } = require("body-parser");
 const morgan = require("morgan");
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config.env" });
 const express = require("express");
 const tour = require("./Routes/TourRoute");
 const user = require("./Routes/UserRoute");
@@ -13,14 +15,13 @@ const mongoSanitize = require("express-mongo-sanitize");
 const hpp = require("hpp");
 const xss = require("xss-clean");
 const path = require("path");
+const booking = require("./Routes/BookingRoute");
 // const path = require("path");
-const dotenv = require("dotenv");
 const { default: mongoose } = require("mongoose");
 const cors = require("cors");
 
 // Basic allow all (for dev only)
 
-dotenv.config({ path: "./config.env" });
 
 const DB = process.env.DATABASE.replace(
   "<PASSWORD>",
@@ -60,19 +61,21 @@ app.use(mongoSanitize());
 // Data sanitization against XSS
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://natoure-frontend.vercel.app"
+  "https://natoure-frontend.vercel.app",
 ];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 app.use((req, res, next) => {
   res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
   next();
@@ -82,13 +85,16 @@ app.use(xss());
 
 //Routes
 app.use("/api/v1/tours", tour);
+
 // app.use("/api/v1/tours", tour);
 app.use("/api/v1/user", user);
 app.use("/api/v1/reviews", review);
+app.use("/api/v1/booking", booking);
 
 app.get("/", (req, res) => {
   res.status(200).send("🚀 API is running!");
 });
+
 
 //koi unknow url ke liye error throw krega
 app.all("*", (req, res, next) => {
