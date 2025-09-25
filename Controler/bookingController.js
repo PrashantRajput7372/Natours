@@ -18,7 +18,7 @@ exports.getCheckOutSession = catchAsync(async (req, res, next) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card", "crypto", "amazon_pay"],
     mode: "payment",
-    success_url: `https://natoure-frontend.vercel.app/tours/payment-success?tourId=${req.params.tourId}&email=${req.user.email}&amount=${tours.price}&tourName=${tours.name}`,
+    success_url: `https://natoure-frontend.vercel.app/payment-success?tourId=${req.params.tourId}&email=${req.user.email}&amount=${tours.price}&tourName=${tours.name}`,
     cancel_url: `${req.protocol}://${req.get("host")}/tour/${tours.slug}`,
     customer_email: req.user.email,
     client_reference_id: req.params.tourId,
